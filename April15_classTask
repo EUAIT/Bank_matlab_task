@@ -1,0 +1,68 @@
+%Task1
+
+G = tf([10 2 10], [1 3 2]);
+
+step(G);
+
+info = stepinfo(G);
+disp(info);
+
+% Task2
+
+G1 = tf([5 4 5], [1 3 2]); 
+G2 = tf([5 2 5], [1 3 2]); 
+
+
+figure;
+step(G1, 'r', G2, 'b');
+legend('G1(s)', 'G2(s)');
+title('Step Responses of G1(s) and G2(s)');
+xlabel('Time (seconds)');
+ylabel('Amplitude');
+grid on;
+
+
+info1 = stepinfo(G1);
+info2 = stepinfo(G2);
+
+
+disp('Step Response Info for G1:');
+disp(info1);
+
+disp('Step Response Info for G2:');
+disp(info2);
+
+% Task3 
+
+numerator = [1 3];
+denominator = [1 4 13];
+G = tf(numerator, denominator);
+
+figure;
+subplot(2,1,1);
+impulse(G);
+title('Impulse Response of G(s)');
+grid on;
+
+subplot(2,1,2);
+step(G);
+title('Step Response of G(s)');
+grid on;
+
+% Task4
+
+numerator = [20 0];
+denominator = [1 4];
+G = tf(numerator, denominator);
+
+H = 1;
+T = feedback(G, H);
+
+figure;
+step(T);
+title('Step Response of Closed-Loop System');
+grid on;
+
+info = stepinfo(T);
+disp('Step Response Characteristics:');
+disp(info);
